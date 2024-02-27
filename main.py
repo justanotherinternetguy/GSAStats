@@ -3,11 +3,12 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 
+
 intents = discord.Intents().all()
 intents.members = True
 description = "GSAStats"
 client = discord.Client(intents=intents)
-bot = commands.Bot(command_prefix='~', intents=intents)
+bot = commands.Bot(command_prefix='/', intents=intents)
 
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")

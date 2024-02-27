@@ -1,6 +1,6 @@
 import discord
-from discord.utils import get
 from discord.ext import commands
+from discord import app_commands
 import random
 import http.client
 from datetime import timedelta
@@ -26,8 +26,8 @@ class FTC(commands.Cog):
     async def on_ready(self):
         print("FTC.cog READY")
     
-    @commands.command()
-    async def search(self, ctx, teamNumber: int):
+    @commands.command(name="search",description="Get information about an FTC team by its team number")
+    async def search(self, interaction:discord.Interaction, teamNumber: int):
         """Get information about an FTC team by its team number"""
         data = r.get("https://ftc-api.firstinspires.org/v2.0/2022/teams?teamNumber={0}".format(int(teamNumber)), auth=(FTC_USERNAME, FTC_TOKEN))
         json = data.json()
