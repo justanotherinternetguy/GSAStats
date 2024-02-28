@@ -20,6 +20,11 @@ FTC_TOKEN = os.getenv("FTC_TOKEN")
 
 bot = commands.Bot()
 
+socials = {
+  "8405": ["https://example.com", "https://example.com", "https://example.com"],
+  "23650": ["https://example.com"],
+}
+
 @bot.slash_command(
   name="first_slash",
   guild_ids=[1085701258687565854]
@@ -44,9 +49,21 @@ async def search(ctx, team_number: int):
     embed.add_field(name="School: ", value="{0}".format(json["teams"][0]["nameFull"]), inline=True)
     embed.add_field(name="Located in: ", value="{0}, {1}, {2}".format(json["teams"][0]["city"], json["teams"][0]["stateProv"], json["teams"][0]["country"]), inline=False)
     embed.add_field(name="Rookie Year: ", value="{0}".format(json["teams"][0]["rookieYear"]), inline=False)
+
+    if str(team_number) in socials:
+      social_links = socials[str(team_number)]
+      if social_links:
+        socials_string = "\n".join(social_links)
+        embed.add_field(name="Socials", value=socials_string, inline=False)
+
     await ctx.respond(embed=embed)
   except Exception as e:
-    embed = discord.Embed(title="**https://theorangealliance.org/teams/{0}**".format(int(team_number)), color=0xffffff)
+    embed = discord.Embed(title="**https://ftcscout.org/teams/{0}**".format(int(team_number)), color=0xffffff)
+    if str(team_number) in socials:
+      social_links = socials[str(team_number)]
+      if social_links:
+        socials_string = "\n".join(social_links)
+        embed.add_field(name="Socials", value=socials_string, inline=False)
     await ctx.respond(embed=embed)
 
 def get_ym_joke():
