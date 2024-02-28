@@ -21,8 +21,10 @@ FTC_TOKEN = os.getenv("FTC_TOKEN")
 bot = commands.Bot()
 
 socials = {
-  "8405": ["https://example.com", "https://example.com", "https://example.com"],
-  "23650": ["https://example.com"],
+  "8405": ["https://www.instagram.com/millburnftc/"],
+  "23650": ["https://www.instagram.com/millburnftc/"],
+  "207": ["https://www.instagram.com/ftc207/"],
+  "13302": ["https://linktr.ee/mkarobotics/", "https://instagram.com/mkarobotics"],
 }
 
 @bot.slash_command(
